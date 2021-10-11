@@ -12,9 +12,11 @@ The ACT script is used to search routers for a matching IP. This will help maint
 - Easily able to duplicate access of checked IP
 
 # Syntax
-act.py [-h] -i _ip_ [-s] _xmc_server_ [-u] _username_ [-k] [-t] _thread_count_ [-w] _log_filename_ [-n] [-V]
+act.py [-h] -i _ip_ [-s] _xmc_server_ [-u] _username_ [-t] _thread_count_ [-w] _log_filename_ [-n] [-V]
 
 # Examples
-act.py -i 10.1.1.2 -s xmc.example.com -u admin -k -t 10 -w test_run.log
+act.py -i 10.1.1.2 -s xmc.example.com -u admin -t 10 -w test_run.log
 
-act.py -i 10.0.0.0 -u admin -k
+act.py -i 10.1.1.2,10.2.2.1 -u admin
+
+act.py -i 10.0.0.0 -u admin

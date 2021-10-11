@@ -24,7 +24,6 @@
 
 import argparse
 import requests
-import json
 import getpass
 import re
 import os
@@ -278,7 +277,8 @@ def main():
     api_url = 'https://' + args.s + ':8443/nbi/graphql' # URL of the XMC server, pulled from -s flag in argparse
 
     http_params = {
-        'query': 'query { network { devices { ip nickName nosIdName } } }' # XMC API query to run, more info at https://{xmc_server}:8443/nbi/graphiql/index.html then click on Docs in the top right
+        # XMC API query to run, more info at https://{xmc_server}:8443/nbi/graphiql/index.html then click on Docs in the top right
+        'query': 'query { network { devices { ip nickName nosIdName } } }'
     }
 
     NET_DEVICE = { # Basic device dictionary, this is copied in the main function and values are then filled in

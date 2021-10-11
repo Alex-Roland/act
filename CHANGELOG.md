@@ -5,7 +5,7 @@ Change from Threading to Multiprocessing to make the script faster
 
 Version 2.3.2 - 2021-10-11
 --------------------------
-Added: docstrings to functions
+Added: docstrings for functions
 Added: setup.py
 Updated: Restructured project files and folders
 
