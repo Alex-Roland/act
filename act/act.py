@@ -299,34 +299,28 @@ def main():
     device_queue = Queue(maxsize=0) # Opens a queue for the device network connection information
     device_details = Queue(maxsize=0) # Opens a queue for the detailed device information
 
-    x = 0 # Variable to increment JSON index in below for loop
-
     try:
         r = requests.get(api_url, auth = (args.u, password), params = http_params, verify = not args.n) # API call to XMC server
         if r.status_code != requests.codes.ok:
             r.raise_for_status()
-        result = r.json() # Convert result to JSON format
-        for device in result['data']['network']['devices']:
-            if result['data']['network']['devices'][x]['nickName'] is None:
-                x += 1
+        result = r.json()['data']['network']['devices'] # Convert result to JSON format
+        for device in result:
+            if device['nickName'] is None:
                 continue
-            router_check = grab_routers(result['data']['network']['devices'][x]['nickName'])
+            router_check = grab_routers(device['nickName'])
             if router_check == False:
-                x += 1
                 continue
-            vendor = discover_vendor(result['data']['network']['devices'][x]['nickName'], result['data']['network']['devices'][x]['nosIdName'])
+            vendor = discover_vendor(device['nickName'], device['nosIdName'])
             if vendor == 'null':
-                x += 1
                 continue
             new_device = NET_DEVICE.copy()
             new_device['device_type'] = vendor # Pulls vendor from hostname, which is used as the connection profile for Netmiko
-            new_device['ip'] = result['data']['network']['devices'][x]['ip'] # Pulls IP to connect to
+            new_device['ip'] = device['ip'] # Pulls IP to connect to
             new_device['password'] = password # Puts the prompted SSH user password into the dictionary
             device_queue.put(new_device) # Loads device network connetion information into the queue
             device_details.put(device)
-            x += 1
     except requests.exceptions.HTTPError as r:
-        print(f'Unable to connect to {args.s}, check connection or username/password')
+        print(f'Unable to connect to {api_url}, check connection or username/password')
         exit(255)
     except BaseException as e:
         log_failed('Failed to fetch data from XMC:')
