@@ -3,6 +3,11 @@ Unreleased - planned
 Change from Threading to Multiprocessing to make the script faster
 
 
+Version 2.3.3 - 2021-10-12
+--------------------------
+Updated: Changed how JSON is handled from the XMC API call in the main function
+
+
 Version 2.3.2 - 2021-10-11
 --------------------------
 Added: docstrings for functions
