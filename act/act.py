@@ -46,8 +46,8 @@ parser.add_argument('-V', help = 'display version information', default = False,
 args = parser.parse_args()
 
 NAME = 'ACL Check Tool'
-VERSION = '2.3.2'
-DATE = '10/11/2021'
+VERSION = '2.3.4'
+DATE = '10/12/2021'
 
 if args.V == True: # Script version information
     print('|' + '-'*30 + '|')
@@ -292,8 +292,8 @@ def main():
     ip_list = [addr.replace('.', '\.') for addr in ips] # Converts each IP in the list to escape the dot between the octects
     global failed
 
-    logger('Starting search...')
-    out_sum('Starting search...')
+    logger('Connecting...')
+    out_sum('Connecting...')
     start_time = datetime.now()
 
     device_queue = Queue(maxsize=0) # Opens a queue for the device network connection information
@@ -319,24 +319,26 @@ def main():
             new_device['password'] = password # Puts the prompted SSH user password into the dictionary
             device_queue.put(new_device) # Loads device network connetion information into the queue
             device_details.put(device)
+        
+        total_devices = device_queue.qsize() # Used in the max thread calculation
+        logger(f'\nSearching {total_devices} routers')
+        out_sum(f'\nSearching {total_devices} routers')
+
+        run_threads(total_devices=total_devices, mt_function=send_commands, dq=device_queue, dd=device_details, ip_list=ip_list) # Calls the multithreading function
+        device_queue.join() # Blocks until all items in the queue have been gotten and processed
+
+        logger(f'\nElapsed time: {str(datetime.now() - start_time)}') # Total runtime for the script
+        out_sum(f'\nElapsed time: {str(datetime.now() - start_time)}') # Total runtime for the script
     except requests.exceptions.HTTPError as r:
         print(f'Unable to connect to {api_url}, check connection or username/password')
-        exit(255)
+        log_failed(f'Unable to connect to {api_url}, check connection or username/password')
+        log_failed(r)
     except BaseException as e:
-        log_failed('Failed to fetch data from XMC:')
+        print(f'Failed to fetch data, check connection to "{args.s}"')
+        log_failed('Failed to fetch data:')
         log_failed(e)
         failed = True
-        
-    total_devices = device_queue.qsize() # Used in the max thread calculation
-    logger(f'\nSearching {total_devices} routers')
-    out_sum(f'\nSearching {total_devices} routers')
-
-    run_threads(total_devices=total_devices, mt_function=send_commands, dq=device_queue, dd=device_details, ip_list=ip_list) # Calls the multithreading function
-    device_queue.join() # Blocks until all items in the queue have been gotten and processed
-
-    logger(f'\nElapsed time: {str(datetime.now() - start_time)}') # Total runtime for the script
-    out_sum(f'\nElapsed time: {str(datetime.now() - start_time)}') # Total runtime for the script
-
+    
     if failed == True:
         print(f'{warningColor}There were some issues, check the failed log output for details{resetColor}')
 

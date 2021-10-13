@@ -1,6 +1,18 @@
 Unreleased - planned
 --------------------
 Change from Threading to Multiprocessing to make the script faster
+Add additional NMS support (LibreNMS, Zabbix, etc...)
+
+
+Version 2.3.4 - 2021-10-12
+--------------------------
+Fixed: Issue with hyperthreading being called
+Fixed: Exception handling for connection to NMS was not implemented correctly
+
+
+Version 2.3.3 - 2021-10-12
+--------------------------
+Updated: Changed how JSON is handled from the XMC API call in the main function
 
 
 Version 2.3.2 - 2021-10-11
