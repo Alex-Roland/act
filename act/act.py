@@ -47,8 +47,8 @@ args = parser.parse_args()
 
 def version_info():
     NAME = 'ACL Check Tool'
-    VERSION = '2.3.4'
-    DATE = '10/12/2021'
+    VERSION = '2.3.5'
+    DATE = '10/22/2021'
 
     print('|' + '-'*30 + '|')
     print('|' + ' '*8 + NAME + ' '*8 + '|')
