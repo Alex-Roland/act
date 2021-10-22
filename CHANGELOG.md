@@ -4,6 +4,11 @@ Change from Threading to Multiprocessing to make the script faster
 Add additional NMS support (LibreNMS, Zabbix, etc...)
 
 
+Version 2.3.5 - 2021-10-22
+--------------------------
+Updated: setup.py version is now pulled from the act.py file
+
+
 Version 2.3.4 - 2021-10-12
 --------------------------
 Fixed: Issue with hyperthreading being called

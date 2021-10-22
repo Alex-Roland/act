@@ -45,17 +45,20 @@ parser.add_argument('-n', help = 'do not validate HTTPS certificates (default: f
 parser.add_argument('-V', help = 'display version information', default = False, action = 'store_true')
 args = parser.parse_args()
 
-NAME = 'ACL Check Tool'
-VERSION = '2.3.4'
-DATE = '10/12/2021'
+def version_info():
+    NAME = 'ACL Check Tool'
+    VERSION = '2.3.4'
+    DATE = '10/12/2021'
 
-if args.V == True: # Script version information
     print('|' + '-'*30 + '|')
     print('|' + ' '*8 + NAME + ' '*8 + '|')
     print('|' + '-'*30 + '|')
     print('|' + ' '*4 + VERSION + ' '*5 + '|' + ' '*3 + DATE + ' '*2 + '|')
     print('|' + '-'*30 + '|')
     exit(0)
+
+if args.V == True: # Script version information
+    version_info()
 
 if args.i is None: # Checks if user provided an IP to check against
     print('Please provide at least one IP to check')

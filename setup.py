@@ -1,8 +1,9 @@
 from setuptools import setup
+from act.act import version_info
 
 setup(
     name='ACL Check Tool',
-    version='2.3.1',
+    version=version_info().VERSION,
     description='Search ACLs for a matching IP',
     author='Alex Roland',
     author_email='alex.roland@peacefulnetworks.com',
