@@ -55,10 +55,10 @@ def version_info():
     print('|' + '-'*30 + '|')
     print('|' + ' '*4 + VERSION + ' '*5 + '|' + ' '*3 + DATE + ' '*2 + '|')
     print('|' + '-'*30 + '|')
-    exit(0)
 
 if args.V == True: # Script version information
     version_info()
+    exit(0)
 
 if args.i is None: # Checks if user provided an IP to check against
     print('Please provide at least one IP to check')
