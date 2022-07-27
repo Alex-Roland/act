@@ -1,7 +1,26 @@
 Unreleased - planned
 --------------------
-Change from Threading to Multiprocessing to make the script faster
-Add additional NMS support (LibreNMS, Zabbix, etc...)
+Add additional LibreNMS and Solarwinds support
+
+
+Version 2.5.0 - 2022-05-02
+--------------------------
+Added: Ability to match on strings, such as icmp or "tcp any any established"
+
+
+Version 2.4.0 - 2022-05-02
+--------------------------
+Added: Option to print all ACls
+
+
+Version 2.3.7 - 2021-10-27
+--------------------------
+Fixed: Fixed setup.py since importing from act.py isn't working yet
+
+
+Version 2.3.6 - 2021-10-27
+--------------------------
+Updated: Changed the handling for error notification
 
 
 Version 2.3.5 - 2021-10-22
