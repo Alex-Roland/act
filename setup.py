@@ -1,9 +1,8 @@
 from setuptools import setup
-from act.act import version_info
 
 setup(
     name='act',
-    version=version_info().VERSION,
+    version='2.5.0',
     description='Search ACLs for a matching IP',
     author='Alex Roland',
     author_email='alex.roland@peacefulnetworks.com',
